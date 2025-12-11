@@ -1,10 +1,22 @@
 const mongoose = require("mongoose");
 
-const wishlistSchema = mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    products: [
-        { type: mongoose.Schema.Types.ObjectId, ref: "Product" }
-    ]
+const userSchema = mongoose.Schema({
+    name: { type: String, required: true },
+
+    email: { type: String, required: true, unique: true },
+    password: { type: String },
+
+    googleId: { type: String }, // for Google login
+
+    role: { type: String, default: "user" },
+
+    cart: [
+        {
+            product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+            quantity: { type: Number, default: 1 }
+        }
+    ],
+
 }, { timestamps: true });
 
-module.exports = mongoose.model("Wishlist", wishlistSchema);
+module.exports = mongoose.model("User", userSchema);

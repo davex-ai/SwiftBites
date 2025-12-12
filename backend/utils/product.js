@@ -11,6 +11,11 @@ export async function getProduct(id) {
     return await Product.findById(id)  
 }
 
+export async function getProductsByCategory(category) {
+    await connectDB() 
+    return await Product.find({ category })  
+}
+
 export async function createProduct(data) {
     await connectDB()
     return await Product.create(data) 

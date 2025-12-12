@@ -4,7 +4,7 @@ const {
     placeOrder,
     getMyOrders,
     getOrder
-} = require('../controller/order');
+} = require('../utils/order');
 
 const { protect } = require('../middleware/authMiddleware');
 

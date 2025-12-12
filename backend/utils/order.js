@@ -1,5 +1,5 @@
 import Order from "../model/Order";
-import { connectDB } from "../utils/db";
+import { connectDB } from "./db";
 
 export async function placeOrder(data) {
     await connectDB()

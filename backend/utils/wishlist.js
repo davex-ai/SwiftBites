@@ -1,5 +1,5 @@
 import Wishlist from "../model/Wishlist";
-import { connectDB } from "../utils/db";
+import { connectDB } from "./db";
 
 export async function addToWishlist(userId, productId) {
     await connectDB();

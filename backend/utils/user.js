@@ -1,5 +1,5 @@
 import User from "../model/User";
- import { connectDB } from "../utils/db";
+ import { connectDB } from "./db";
 
 export async function registerUser({data}) {
     await connectDB()

@@ -1,5 +1,5 @@
 import Product from "../model/Product";
-import { connectDB } from "../utils/db";
+import { connectDB } from "./db";
 
 export async function getProducts() {
     await connectDB()

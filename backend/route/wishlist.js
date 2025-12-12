@@ -8,8 +8,8 @@ const {
 
 const { protect } = require('../middleware/authMiddleware');
 
-router.get('/', protect, getWishlist);
-router.post('/:productId', protect, addToWishlist);
-router.delete('/:productId', protect, removeFromWishlist);
+router.get('/wishlist', protect, getWishlist);
+router.post('/wishlist/remove', protect, addToWishlist);
+router.delete('/wishlist/add', protect, removeFromWishlist);
 
 module.exports = router;

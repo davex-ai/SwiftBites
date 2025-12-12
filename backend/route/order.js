@@ -1,17 +1,17 @@
-import express from 'express'
-import { updateOrderStatus } from '../controller/order';
+import express from "express";
+import {
+    createOrder,
+    getUserOrders,
+    getOrderById,
+    updateOrderStatus
+} from "../controller/order.js";
+
 const router = express.Router();
-const {
-    placeOrder,
-    getMyOrders,
-    getOrder
-} = require('../utils/order');
+const { protect, admin } = require("../middleware/authMiddleware");
 
-const { protect } = require('../middleware/authMiddleware');
+router.post("/orders", protect, createOrder);
+router.get("/my-orders", protect, getUserOrders);
+router.get("/orders/:id", protect, getOrderById);
+router.patch("/orders/:id", protect, admin, updateOrderStatus);
 
-router.post('/orders', protect, placeOrder);
-router.get('/my-orders', protect, getMyOrders);
-router.get('/orders/:id', protect, getOrder);
-router.get('/orders/:id', protect, updateOrderStatus);
-
-module.exports = router;
+export default router;

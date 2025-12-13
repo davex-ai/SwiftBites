@@ -9,7 +9,6 @@ const productSchema = mongoose.Schema({
     rating: { type: Number, default: 0 },
     numReviews: { type: Number, default: 0 },
     reviews: [{ rating: Number, comment: String, createdAt: Date }],
-    numReviews: Number
 
 
 }, { timestamps: true });

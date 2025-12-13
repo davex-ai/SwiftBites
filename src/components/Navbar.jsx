@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '/logo.png';
 import call from '../assets/Vector.png';
 import cart from '../assets/i.ri-shopping-cart-line.png';
 import love from '../assets/i.ri-heart-3-line.png';
 
 function Navbar() {
+
+    const [open, setOpen] = useState(false)
     
   return (
     <div className="flex items-center justify-between px-6 py-4 bg-white shadow-sm">
@@ -22,6 +24,11 @@ function Navbar() {
       <div className="sm:flex items-center space-x-5 hidden"> 
         <a href="#"><img src={cart} alt="" /></a>
         <a href="#"><img src={love} alt="" /> </a>
+      </div>
+      <div className="flex flex-col sm:hidden cursor-pointer h-[2%]" onClick={() => setOpen(!open)}>
+        <span className={`w-6 h-1 bg-black m-1 transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`}></span>
+        <span className={`w-6 h-1 bg-black m-1 transition-all duration-300 ${open ? 'opacity-0' : ''}`}></span>
+        <span className={`w-6 h-1 bg-black m-1 transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`}></span>
       </div>
     </div>
   );

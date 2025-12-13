@@ -3,6 +3,8 @@ import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import foodtrove from './../assets/foodtrove.png'
+import Navbar from "../components/Navbar";
+
 
 
 export default function Register() {
@@ -29,8 +31,9 @@ export default function Register() {
     };
 
     return (
-        <div>   
-            <div className="flex justify-evenly text-white bg-[#F53E32] h-20 items-center">
+        <div>
+            <Navbar/> 
+            <div className="flex justify-evenly text-white bg-[#F53E32] h-14 items-center">
                 <h2>Register</h2>
                 <h2>Home- Register</h2>
             </div>

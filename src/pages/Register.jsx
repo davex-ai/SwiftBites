@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import foodtrove from './../assets/foodtrove.png'
 import Navbar from "../components/Navbar";
+import { useAuth } from "../context/AuthContext";
 // import Footer from "../components/Footer";
 
 export default function Register() {
@@ -15,13 +16,13 @@ export default function Register() {
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
     const navigate = useNavigate();
+    const { login } = useAuth()
 
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         const { data } = await API.post("/register", { name, email, password, address, phoneNo, city, country });
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data));
+        login(data)
         toast.success("Registration successful!");
         navigate("/");
     } catch (err) {

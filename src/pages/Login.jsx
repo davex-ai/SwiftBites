@@ -4,19 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import foodtrove from './../assets/foodtrove.png'
+import { useAuth } from "../context/AuthContext";
 
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const {login} = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const { data } = await API.post("/login", { email, password });
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data));
+           login(data)
             toast.success("Login successful!");
             navigate("/");
         } catch (err) {

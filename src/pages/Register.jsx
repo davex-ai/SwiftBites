@@ -17,17 +17,27 @@ export default function Register() {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const { data } = await API.post("/register", { name, email, password });
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data));
-            toast.success("Registration successful!");
-            navigate("/");
-        } catch (err) {
-            toast.error(err.response?.data?.message || "Registration failed");
-        }
-    };
+    e.preventDefault();
+    try {
+        const { data } = await API.post("/register", {
+            name,
+            email,
+            password,
+            address,
+            phoneNo,
+            city,
+            country
+        });
+
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data));
+        toast.success("Registration successful!");
+        navigate("/");
+    } catch (err) {
+        toast.error(err.response?.data?.message || "Registration failed");
+    }
+};
+
 
     return (
         <div>

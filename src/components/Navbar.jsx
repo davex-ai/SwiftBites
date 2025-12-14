@@ -3,9 +3,12 @@ import logo from '/logo.png';
 import call from '../assets/Vector.png';
 import cart from '../assets/i.ri-shopping-cart-line.png';
 import love from '../assets/i.ri-heart-3-line.png';
+import { useAuth } from "../context/AuthContext";
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     const [open, setOpen] = useState(false);
+    const { user } = useAuth()
 
     return (
         <nav className="relative px-4 py-4 bg-white shadow-sm z-50">
@@ -16,6 +19,7 @@ function Navbar() {
                     <a href="#" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">Home</a>
                     <a href="#" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">About Us</a>
                     <a href="#" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">Products</a>
+                    {user && (<Link to="/profile" className='text-gray-700 hover:text-[#F53E32] hover:underline font-medium'>Profile</Link>)}
                     <a href="#" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">Profile</a>
                 </div>
 

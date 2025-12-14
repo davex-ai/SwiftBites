@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import foodtrove from './../assets/foodtrove.png'
 import { useAuth } from "../context/AuthContext";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 
 export default function Login() {
@@ -26,6 +28,8 @@ export default function Login() {
     };
 
     return (
+    <div>
+        <Navbar/>
         <div className="flex justify-center items-center h-screen ">
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96"  >
                 <img src={foodtrove} className="mx-auto" alt="" />
@@ -45,6 +49,8 @@ export default function Login() {
                     <a href="/register" className="text-gray-500">SignUp</a>
                 </div>
             </form>
+        </div>
+            <Footer/>
         </div>
     );
 }

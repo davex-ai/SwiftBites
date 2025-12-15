@@ -18,7 +18,7 @@ function Navbar() {
                 <div className="hidden sm:flex items-center space-x-8">
                     <Link to="/" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">Home</Link>
                     <Link to="/about" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">About Us</Link>
-                    <Link to="/product" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">Products</Link>
+                    <Link to="/products" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium">Products</Link>
                     {user && (<Link to="/profile" className='text-gray-700 hover:text-[#F53E32] hover:underline font-medium'>Profile</Link>)}
                 </div>
 

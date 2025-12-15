@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
-import ProductCardGrid from "../components/ProductCard/ProductCardGrid";
+import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);

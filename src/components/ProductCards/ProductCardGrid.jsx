@@ -1,17 +1,43 @@
+import React from 'react';
+
 function ProductCardGrid({ product }) {
   return (
-    <div className="product-card">
-      <img src={product.images} alt={product.name} />
+    <div className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow bg-white">
+      {/* Image */}
+      <img
+        src={product.images} // ✅ Fix: no [0], it's a string
+        alt={product.name}
+        className="w-full h-48 object-cover rounded-md mb-3"
+      />
 
-      <h3>{product.name}</h3>
-      <p className="price">₦{product.price}</p>
+      {/* Name */}
+      <h3 className="font-semibold text-gray-800 text-lg mb-1">{product.name}</h3>
 
-      <span className="category">{product.category}</span>
+      {/* Price */}
+      <p className="text-xl font-bold text-green-600 mb-2">₦{product.price}</p>
 
+      {/* Category */}
+      <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full mb-2">
+        {product.category}
+      </span>
+
+      {/* Stock Status */}
       {product.stock > 0 ? (
-        <span className="in-stock">In stock</span>
+        <span className="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+          In stock ({product.stock})
+        </span>
       ) : (
-        <span className="out-stock">Out of stock</span>
+        <span className="inline-block px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">
+          Out of stock
+        </span>
+      )}
+
+      {/* Rating (optional) */}
+      {product.rating && (
+        <div className="mt-2 text-yellow-500">
+          {"★".repeat(Math.floor(product.rating))}{"☆".repeat(5 - Math.floor(product.rating))}
+          <span className="ml-1 text-gray-600 text-xs">({product.numReviews} reviews)</span>
+        </div>
       )}
     </div>
   );

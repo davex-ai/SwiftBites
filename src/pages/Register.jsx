@@ -19,16 +19,16 @@ export default function Register() {
     const { login } = useAuth()
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        const { data } = await API.post("/register", { name, email, password, address, phoneNo, city, country });
-        login(data)
-        toast.success("Registration successful!");
-        navigate("/");
-    } catch (err) {
-        toast.error(err.response?.data?.message || "Registration failed");
-    }
-};
+        e.preventDefault();
+        try {
+            const { data } = await API.post("/register", { name, email, password, address, phoneNo, city, country });
+            login(data)
+            toast.success("Registration successful!");
+            navigate("/");
+        } catch (err) {
+            toast.error(err.response?.data?.message || "Registration failed");
+        }
+    };
 
     return (
         <div>
@@ -58,7 +58,7 @@ export default function Register() {
                     </div>
                 </form>
             </div>
-        <Footer/>
+            <Footer />
         </div>
     );
 }

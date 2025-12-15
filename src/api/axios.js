@@ -1,5 +1,7 @@
 import axios from "axios"
 
+export const BASE_IMAGE_URL = "https://swiftbites-backend-cwmy.onrender.com";
+
 const api = axios.create({
     baseURL: "https://swiftbites-backend-cwmy.onrender.com/api",
     headers: {
@@ -14,4 +16,4 @@ api.interceptors.request.use((config) => {
     }
     return config
 })
-export default api
+export default  api

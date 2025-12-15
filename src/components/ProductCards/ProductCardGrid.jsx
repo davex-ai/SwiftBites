@@ -1,11 +1,12 @@
 import React from 'react';
+import { BASE_IMAGE_URL } from '../../api/axios'
 
 function ProductCardGrid({ product }) {
   return (
     <div className="border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow bg-white">
       {/* Image */}
       <img
-        src={product.images} // ✅ Fix: no [0], it's a string
+        src={`${BASE_IMAGE_URL}${product.images}`} // ✅ Now points to backend server
         alt={product.name}
         className="w-full h-48 object-cover rounded-md mb-3"
       />
@@ -32,7 +33,7 @@ function ProductCardGrid({ product }) {
         </span>
       )}
 
-      {/* Rating (optional) */}
+      {/* Rating */}
       {product.rating && (
         <div className="mt-2 text-yellow-500">
           {"★".repeat(Math.floor(product.rating))}{"☆".repeat(5 - Math.floor(product.rating))}

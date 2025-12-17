@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import { BASE_IMAGE_URL } from '../../api/axios';
 import { FaHeart, FaRegHeart } from 'react-icons/fa'; // npm install react-icons
+import { useNavigate } from 'react-router-dom';
 
 const ProductCardGrid = ({ product }) => {
     const [isInWishlist, setIsInWishlist] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const navigate =  useNavigate();
 
     const handleImageLoad = () => setIsLoading(false);
 
@@ -22,7 +24,7 @@ const ProductCardGrid = ({ product }) => {
 
 
     return (
-        <div className="bg-white rounded-xl shadow-sm p-3 mb-4 hover:shadow-lg transition-shadow duration-300">
+        <div className="bg-white rounded-xl shadow-sm p-3 mb-4 hover:shadow-lg transition-shadow duration-300 cursor-pointe" onClick={() => navigate(`/products/${product._id}`)}>
             {/* Image Container */}
             <div className="w-full h-40  rounded-lg overflow-hidden mb-3 relative">
                 {isLoading && (

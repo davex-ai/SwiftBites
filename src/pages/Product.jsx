@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 
-function ProductsPage() {
+function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false); // for mobile modal
@@ -206,4 +206,4 @@ function ProductsPage() {
   );
 }
 
-export default ProductsPage;
+export default Products;

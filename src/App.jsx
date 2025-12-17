@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/Protected";
 import ProductsPage from "./pages/Product";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<ProductsPage/>} />
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route element={<ProtectedRoute />}>
           {/* <Route path="/profile" element={<Profile />} /> */}
           </Route>

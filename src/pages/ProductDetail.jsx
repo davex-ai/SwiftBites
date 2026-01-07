@@ -22,21 +22,29 @@ function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await api.get(`/products/${id}`);
-        setProduct(data);
- 
-        // Fetch related products by category
-        if (data.category) {
-          const related = await api.get(`/products/category/${data.category}`);
-          setRelatedProducts(related.data.filter(p => p._id !== id).slice(0, 4)); // Show 4 related
-        }
-      } catch (err) {
-        console.error("Failed to load product:", err);
-        toast.error("Product not found");
-        navigate("/products");
-      } finally {
-        setLoading(false);
+      // Fetch product
+      const { data: productData } = await api.get(`/products/${id}`);
+      setProduct(productData);
+
+      // Fetch wishlist
+      const { data: wishlistData } = await api.get('/wishlist');
+      const inWishlist = wishlistData?.products?.some(
+        p => p._id === id || p === id
+      );
+      setIsInWishlist(!!inWishlist);
+
+      // Fetch related products
+      if (productData.category) {
+        const related = await api.get(`/products/category/${productData.category}`);
+        setRelatedProducts(related.data.filter(p => p._id !== id).slice(0, 4));
       }
+    } catch (err) {
+      console.error("Error loading product or wishlist:", err);
+      toast.error("Failed to load product");
+      navigate("/products");
+    } finally {
+      setLoading(false);
+    }
     };
 
     fetchProduct();
@@ -47,30 +55,54 @@ function ProductDetail() {
   if (!product) return <div className="text-center py-10">Product not found.</div>;
 
   const handleAddToCart = async () => {
-    if (product.stock <= 0) {
-      toast.error("Out of stock!");
-      return;
-    }
+  if (product.stock <= 0) {
+    toast.error("Out of stock!");
+    return;
+  }
 
-    try {
-      const response = await api.post("/cart", {
-        productId: product._id,
-        quantity: parseInt(quantity)
-      });
-
-      toast.success(`Added ${product.name} to cart!`);
-      // Optional: Update cart count in navbar or redirect to cart
-    } catch (err) {
-      toast.error("Failed to add to cart. Please try again.");
+  try {
+    await api.post("/cart", {
+      productId: product._id,
+      quantity: parseInt(quantity)
+    });
+    toast.success(`Added ${product.name} to cart!`);
+  } catch (err) {
+    if (err.response?.status === 401) {
+      toast.error("Please log in to add to cart");
+      navigate("/login"); // or your auth route
+    } else {
+      toast.error("Failed to add to cart");
       console.error(err);
     }
-  };
+  }
+};
 
-  const toggleWishlist = () => {
+  const toggleWishlist = async () => {
+  try {
+    if (isInWishlist) {
+      // Remove from wishlist
+      await api.delete('/wishlist', {
+        data: { productId: product._id } 
+      });
+      toast.success("Removed from wishlist");
+    } else {
+      // Add to wishlist
+      await api.post('/wishlist', { productId: product._id });
+      toast.success("Added to wishlist");
+    }
     setIsInWishlist(!isInWishlist);
-    toast(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
-    // Later: connect to backend wishlist API
-  };
+  } catch (err) {
+    // in toggleWishlist catch block
+if (err.response?.status === 401) {
+  toast.error("Please log in to use wishlist");
+  navigate("/login");
+} else {
+  toast.error("Failed to update wishlist");
+  console.error("Wishlist error:", err);
+  toast.error("Failed to update wishlist");
+}
+  }
+};
 
   return (
     <>
@@ -166,6 +198,15 @@ function ProductDetail() {
               className="border border-gray-300 rounded px-2 py-1 w-16"
             />
           </div>
+
+          {/* Live Total Price */}
+            <div className="mb-4">
+              <p className="text-gray-700">
+                Total: <span className="font-bold text-lg text-[#F53E32]">
+                  ₦{(product.price * quantity).toFixed(2)}
+                </span>
+              </p>
+            </div>
 
           {/* Add to Cart & Wishlist Buttons */}
           <div className="flex gap-2 mb-6">

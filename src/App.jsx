@@ -7,10 +7,12 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/Protected";
 import ProductsPage from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
+import { CartWishlistProvider } from "./context/CartWishlistCOntext";
 
 function App() {
   return (
     <AuthProvider>
+      <CartWishlistProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -24,6 +26,7 @@ function App() {
         </Routes>
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       </Router>
+      </CartWishlistProvider>
     </AuthProvider>
   );
 }

@@ -6,6 +6,7 @@ import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import Navbar from '../components/Navbar'
+import { getImageUrl } from "../utils/image";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -84,7 +85,7 @@ function ProductDetail() {
           <div className="lg:w-1/2">
             <div className="mb-4">
               <img
-                src={product.images || '/placeholder.png'} // fallback if missing
+                src={getImageUrl(product.images)} // fallback if missing
                 alt={product.name}
                 className="w-full h-auto object-contain rounded-lg border"
               />
@@ -93,7 +94,7 @@ function ProductDetail() {
             {/* Thumbnail - only one, since only one image exists */}
             <div className="flex space-x-2 overflow-x-auto pb-2">
               <img
-                src={product.images || '/placeholder.png'}
+                src={getImageUrl(product.images)} // fallback if missing
                 alt={`Thumbnail for ${product.name}`}
                 className="w-16 h-16 object-cover rounded cursor-pointer border-2 border-blue-500"
                 // No need for click handler since only one image

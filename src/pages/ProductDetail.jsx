@@ -82,25 +82,39 @@ function ProductDetail() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* 👈 IMAGE GALLERY */}
-          <div className="lg:w-1/2">
-            <div className="mb-4">
-              <img
-                src={getImageUrl(product.images)} // fallback if missing
-                alt={product.name}
-                className="w-full h-auto object-contain rounded-lg border"
-              />
-            </div>
+          {/* 👈 IMAGE GALLERY */}
+<div className="lg:w-1/2">
+  <div className="relative mb-4 rounded-xl overflow-hidden shadow-lg bg-gray-50">
+    {/* Loading Skeleton */}
+    {!product.images && (
+      <div className="w-full h-80 bg-gray-200 animate-pulse rounded-xl"></div>
+    )}
 
-            {/* Thumbnail - only one, since only one image exists */}
-            <div className="flex space-x-2 overflow-x-auto pb-2">
-              <img
-                src={getImageUrl(product.images)} // fallback if missing
-                alt={`Thumbnail for ${product.name}`}
-                className="w-16 h-16 object-cover rounded cursor-pointer border-2 border-blue-500"
-                // No need for click handler since only one image
-              />
-            </div>
-          </div>
+    {/* Main Image */}
+      {product.images ? (
+        <img
+          src={getImageUrl(product.images)}
+          alt={product.name}
+          className="w-full h-auto object-contain p-4  transition-transform duration-300 hover:scale-105"
+          onError={(e) => {
+            e.target.src = '/placeholder.png'; // fallback if broken
+            e.target.classList.remove('hover:scale-105');
+          }}
+        />
+      ) : (
+        <img
+          src="/placeholder.png"
+          alt="Placeholder"
+          className="w-full h-80 object-contain p-4 bg-white"
+        />
+      )}
+    </div>
+
+    {/* Optional: Add "Image not available" text if needed */}
+    {!product.images && (
+      <p className="text-center text-sm text-gray-500 mt-2">No image available</p>
+    )}
+  </div>
 
         {/* 👉 PRODUCT INFO */}
         <div className="lg:w-1/2">

@@ -5,6 +5,7 @@ import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import Navbar from '../components/Navbar'
 
 function ProductDetail() {
   const { id } = useParams();
@@ -13,7 +14,6 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isInWishlist, setIsInWishlist] = useState(false);
 
@@ -23,8 +23,7 @@ function ProductDetail() {
       try {
         const { data } = await api.get(`/products/${id}`);
         setProduct(data);
-        setSelectedImage(data.images); // Set first image as default
-
+ 
         // Fetch related products by category
         if (data.category) {
           const related = await api.get(`/products/category/${data.category}`);
@@ -73,7 +72,8 @@ function ProductDetail() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <>
+     <div className="container mx-auto px-4 py-6">
       {/* Breadcrumb */}
       <nav className="text-sm mb-4">
         <a href="/products" className="text-blue-600 hover:underline">All Products</a> &gt; {product.name}
@@ -81,33 +81,25 @@ function ProductDetail() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* 👈 IMAGE GALLERY */}
-        <div className="lg:w-1/2">
-          <div className="mb-4">
-            <img
-              src={selectedImage || product.images}
-              alt={product.name}
-              className="w-full h-auto object-contain rounded-lg"
-            />
-          </div>
-
-          {/* Thumbnail Gallery */}
-          <div className="flex space-x-2 overflow-x-auto pb-2">
-            {[
-              product.images,
-              ...product.images.split(',').filter(img => img.trim()).slice(1, 4) // If images is comma-separated string
-            ].map((img, idx) => (
+          <div className="lg:w-1/2">
+            <div className="mb-4">
               <img
-                key={idx}
-                src={img}
-                alt={`Thumbnail ${idx + 1}`}
-                className={`w-16 h-16 object-cover rounded cursor-pointer border ${
-                  selectedImage === img ? "border-blue-500" : "border-gray-300"
-                }`}
-                onClick={() => setSelectedImage(img)}
+                src={product.images || '/placeholder.png'} // fallback if missing
+                alt={product.name}
+                className="w-full h-auto object-contain rounded-lg border"
               />
-            ))}
+            </div>
+
+            {/* Thumbnail - only one, since only one image exists */}
+            <div className="flex space-x-2 overflow-x-auto pb-2">
+              <img
+                src={product.images || '/placeholder.png'}
+                alt={`Thumbnail for ${product.name}`}
+                className="w-16 h-16 object-cover rounded cursor-pointer border-2 border-blue-500"
+                // No need for click handler since only one image
+              />
+            </div>
           </div>
-        </div>
 
         {/* 👉 PRODUCT INFO */}
         <div className="lg:w-1/2">
@@ -197,9 +189,9 @@ function ProductDetail() {
             <h3 className="font-semibold mb-2">Specifications</h3>
             <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
               <li><strong>Category:</strong> {product.category}</li>
-              <li><strong>Weight:</strong> {product.weight || "N/A"}g</li>
-              <li><strong>Flavor:</strong> {product.flavor || "N/A"}</li>
-              <li><strong>Diet Type:</strong> {product.dietType || "N/A"}</li>
+              <li><strong>Price:</strong> ₦{product.price || "N/A"}</li>
+              <li><strong>Stock:</strong> {product.stock || "N/A"}</li>
+              <li><strong>Rating:</strong> {product.rating || "N/A"}</li>
               <li><strong>Speciality:</strong> {product.speciality || "N/A"}</li>
             </ul>
           </div>
@@ -243,6 +235,7 @@ function ProductDetail() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

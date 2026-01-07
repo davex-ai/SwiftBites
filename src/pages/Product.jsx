@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
+import Navbar from '../components/Navbar'
+
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -30,7 +32,6 @@ function Products() {
     fetchProducts();
   }, []);
 
-  // 🧠 Get unique categories dynamically (optional improvement)
   const allCategories = [...new Set(products.map(p => p.category).filter(Boolean))];
 
   const filteredAndSortedProducts = products
@@ -62,7 +63,6 @@ function Products() {
 
   if (loading) return <p className="text-center font-bold text-2xl text-[#F53E32]">Loading...</p>;
 
-  // 🎨 Extract Filter UI into a reusable component (or just a block)
   const FilterSection = ({ isModal = false }) => (
     <div className={`${isModal ? 'p-4 bg-white rounded-lg shadow-lg max-h-[80vh] overflow-y-auto' : 'w-64 p-4 bg-white rounded-lg shadow-md'}`}>
       <div className="flex justify-between items-center mb-4">
@@ -139,6 +139,8 @@ function Products() {
   );
 
   return (
+    <>
+      <Navbar/>
     <div className="container mx-auto px-4 py-6">
       {/* 👆 HEADER */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
@@ -165,7 +167,6 @@ function Products() {
         </div>
       </div>
 
-      {/* 💡 MOBILE FILTER MODAL */}
       {showFilters && (
         <div className="fixed inset-0 z-50 flex justify-center items-start pt-16 bg-black bg-opacity-40 sm:hidden">
           <div className="w-full max-w-sm">
@@ -174,7 +175,6 @@ function Products() {
         </div>
       )}
 
-      {/* 🖥️ DESKTOP LAYOUT: Sidebar + Grid */}
       <div className="hidden sm:flex gap-6">
         <aside>
           <FilterSection />
@@ -203,6 +203,7 @@ function Products() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

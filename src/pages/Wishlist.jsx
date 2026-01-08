@@ -14,9 +14,9 @@ function Wishlist() {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const {  } = await api.get("/wishlist");
+        const { data } = await api.get("/wishlist");
         // Your backend returns { products: [...] }
-        setWishlistProducts(wishlistData.products || []);
+        setWishlistProducts(data.products || []);
       } catch (err) {
         if (err.response?.status === 401) {
           toast.error("Please log in to view wishlist");

@@ -37,24 +37,26 @@ function Navbar() {
         </div>
 
         {/* CART & WISHLIST ICONS WITH BADGES */}
-        <div className="hidden sm:flex items-center space-x-5 relative">
-          <Link to="/cart" className="relative">
-            <img src={cart} alt="Cart" className="h-5" />
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[#F53E32] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </Link>
-          <Link to="/wishlist" className="relative">
-            <img src={love} alt="Wishlist" className="h-5" />
-            {wishlistCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {wishlistCount}
-              </span>
-            )}
-          </Link>
-        </div>
+         {user && (
+          <div className="hidden sm:flex items-center space-x-5 relative">
+            <Link to="/cart" className="relative">
+              <img src={cart} alt="Cart" className="h-5" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-[#F53E32] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+            <Link to="/wishlist" className="relative">
+              <img src={love} alt="Wishlist" className="h-5" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+          </div>
+        )}
 
         {/* Mobile menu toggle */}
         <div
@@ -89,24 +91,26 @@ function Navbar() {
           )}
           
           {/* Mobile cart & wishlist with badges */}
-          <div className="flex space-x-4 pt-2">
-            <Link to="/cart" onClick={() => setOpen(false)} className="relative">
-              <img src={cart} alt="Cart" className="h-5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#F53E32] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-            <Link to="/wishlist" onClick={() => setOpen(false)} className="relative">
-              <img src={love} alt="Wishlist" className="h-5" />
-              {wishlistCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {wishlistCount}
-                </span>
-              )}
-            </Link>
-          </div>
+           {user && (
+            <div className="flex space-x-4 pt-2">
+              <Link to="/cart" onClick={() => setOpen(false)} className="relative">
+                <img src={cart} alt="Cart" className="h-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-[#F53E32] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+              <Link to="/wishlist" onClick={() => setOpen(false)} className="relative">
+                <img src={love} alt="Wishlist" className="h-5" />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

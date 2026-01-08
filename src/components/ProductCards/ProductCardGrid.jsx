@@ -10,14 +10,18 @@ import { useCartWishlist } from '../../context/CartWishlistContext';
 
 const ProductCardGrid = ({ product }) => {
 
-  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(wishlistProductIds.has(product._id));
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-    const { user } = useAuth();
-  const { refetch } = useCartWishlist();
-
+  const { user } = useAuth();
+  const { refetch, wishlistProductIds } = useCartWishlist();
+   
 
   const handleImageLoad = () => setIsLoading(false);
+
+    useEffect(() => {
+    setIsInWishlist(wishlistProductIds.has(product._id));
+  }, [wishlistProductIds, product._id]);
 
   // ✅ NEW: Toggle wishlist with API
   const toggleWishlist = async (e) => {

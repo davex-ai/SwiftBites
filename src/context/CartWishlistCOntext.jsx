@@ -10,6 +10,7 @@ export const CartWishlistProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [wishlistProductIds, setWishlistProductIds] = useState(new Set());
 
   const fetchCounts = async () => {
     if (!user) {
@@ -27,6 +28,10 @@ export const CartWishlistProvider = ({ children }) => {
       // Fetch wishlist
       const wishlistRes = await api.get("/wishlist");
       setWishlistCount(wishlistRes.data?.products?.length || 0);
+      const wishlistProducts = wishlistRes.data.products
+      const wishlistIds = new Set(wishlistProducts.map(p => p._id));
+      setWishlistCount(wishlistProducts.length);
+      setWishlistProductIds(wishlistIds); 
     } catch (err) {
       console.error("Failed to fetch cart/wishlist counts:", err);
       setCartCount(0);
@@ -46,6 +51,7 @@ export const CartWishlistProvider = ({ children }) => {
         cartCount,
         wishlistCount,
         refetch: fetchCounts,
+        wishlistProductIds, 
         loading,
       }}
     >

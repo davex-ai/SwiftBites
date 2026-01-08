@@ -68,7 +68,7 @@ function ProductDetail() {
       productId: product._id,
       quantity: parseInt(quantity)
     });
-    toast.success(`Added ${product.name} to cart!`);
+    toast.success(`Added ${product.name} to cart! Go to Cart to checkout`);
     refetch()
   } catch (err) {
     if (err.response?.status === 401) {

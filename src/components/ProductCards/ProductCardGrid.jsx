@@ -4,7 +4,7 @@ import { BASE_IMAGE_URL } from '../../api/axios';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios'; // 👈 add API
-import { toast } from 'react-hot-toast'; // 👈 add toast
+import { toast } from "react-toastify";
 import { useAuth } from '../../context/AuthContext';
 import { useCartWishlist } from '../../context/CartWishlistContext';
 

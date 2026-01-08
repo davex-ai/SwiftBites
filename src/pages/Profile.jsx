@@ -2,6 +2,7 @@
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import Navbar from "../components/Navbar";
 
 export default function Profile() {
   const { user } = useAuth();
@@ -23,6 +24,9 @@ export default function Profile() {
   if (!user) return null;
 
   return (
+    <>
+    <Navbar/>
+    
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold mb-6">My Profile</h1>
       
@@ -59,5 +63,6 @@ export default function Profile() {
         <a href="/cart" className="text-blue-600 hover:underline">My Cart</a>
       </div>
     </div>
+    </>
   );
 }

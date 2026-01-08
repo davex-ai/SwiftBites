@@ -1,5 +1,5 @@
 // src/components/ProductCards/ProductCardGrid.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BASE_IMAGE_URL } from '../../api/axios';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -10,11 +10,11 @@ import { useCartWishlist } from '../../context/CartWishlistContext';
 
 const ProductCardGrid = ({ product }) => {
 
+    const { refetch, wishlistProductIds } = useCartWishlist();
   const [isInWishlist, setIsInWishlist] = useState(wishlistProductIds.has(product._id));
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { refetch, wishlistProductIds } = useCartWishlist();
    
 
   const handleImageLoad = () => setIsLoading(false);

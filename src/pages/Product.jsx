@@ -61,7 +61,7 @@ function Products() {
     });
   };
 
-  if (loading) return <p className="text-center font-bold text-2xl text-[#F53E32]">Loading...</p>;
+  if (loading) return <><Navbar/> <p className="text-center font-bold text-2xl text-[#F53E32]">Loading...</p></>;
 
   const FilterSection = ({ isModal = false }) => (
     <div className={`${isModal ? 'p-4 bg-white rounded-lg shadow-lg max-h-[80vh] overflow-y-auto' : 'w-64 p-4 bg-white rounded-lg shadow-md'}`}>

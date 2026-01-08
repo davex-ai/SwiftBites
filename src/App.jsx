@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/Protected";
 import ProductsPage from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
 import { CartWishlistProvider } from "./context/CartWishlistCOntext";
+import Wishlist from "./pages/Wishlist";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<ProductsPage/>} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/products/:id" element={<Wishlist/>} />
           <Route element={<ProtectedRoute />}>
           {/* <Route path="/profile" element={<Profile />} /> */}
           </Route>

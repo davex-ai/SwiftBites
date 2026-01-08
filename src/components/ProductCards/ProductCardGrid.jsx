@@ -22,13 +22,13 @@ const ProductCardGrid = ({ product }) => {
   // ✅ NEW: Toggle wishlist with API
   const toggleWishlist = async (e) => {
     e.stopPropagation(); // 👈 CRITICAL: prevent card click
+    if (!user) {
+  toast.error("Please log in to use wishlist");
+  navigate("/login");
+  return;
+}
     try {
 
-        if (!user) {
-      toast.error("Please log in to use wishlist");
-      navigate("/login");
-      return;
-    }
       if (isInWishlist) {
         await api.delete('/wishlist', { data: { productId: product._id } });
         toast.success("Removed from wishlist");

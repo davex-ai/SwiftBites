@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 import Navbar from "../components/Navbar";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 function Wishlist() {
   const [wishlistProducts, setWishlistProducts] = useState([]);

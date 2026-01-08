@@ -4,8 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import { toast } from 'react-hot-toast';
+import { toast } from "react-toastify";
 import { getImageUrl } from "../utils/image";
+import { useCartWishlist } from "../context/CartWishlistContext";
+import Navbar from "../components/Navbar";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -91,12 +93,10 @@ function ProductDetail() {
       // Add to wishlist
       await api.post('/wishlist', { productId: product._id });
       toast.success("Added to wishlist");
-      setIsInWishlist(true)
-      refetch()
     }
     setIsInWishlist(!isInWishlist);
+    refetch()
   } catch (err) {
-    // in toggleWishlist catch block
 if (err.response?.status === 401) {
   toast.error("Please log in to use wishlist");
   navigate("/login");
@@ -110,6 +110,7 @@ if (err.response?.status === 401) {
 
   return (
     <>
+    <Navbar/>
      <div className="container mx-auto px-4 py-6">
       {/* Breadcrumb */}
       <nav className="text-sm mb-4">

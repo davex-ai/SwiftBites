@@ -21,9 +21,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/products" element={<ProductsPage/>} />
           <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/wishlist" element={<Wishlist/>} />
           <Route element={<ProtectedRoute />}>
-          {/* <Route path="/profile" element={<Profile />} /> */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/wishlist" element={<Wishlist/>} />
+ 
           </Route>
         </Routes>
       </Router>

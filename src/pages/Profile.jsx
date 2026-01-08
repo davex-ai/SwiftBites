@@ -5,7 +5,6 @@ import api from "../api/axios";
 import Navbar from "../components/Navbar";
 import { getAvatarUrl } from "../utils/avatar"; // 👈 import helper
 
-// src/pages/Profile.jsx
 function formatDate(dateStr) {
   if (!dateStr) return "Unknown";
 
@@ -40,6 +39,10 @@ function Profile() {
     };
     fetchOrders();
   }, []);
+
+  useEffect(() => {
+  console.log("User createdAt:", user?.createdAt); // 👈 LOG IT
+}, [user]);
 
   if (!user) return null;
 

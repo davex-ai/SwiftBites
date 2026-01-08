@@ -26,8 +26,8 @@ function App() {
           {/* <Route path="/profile" element={<Profile />} /> */}
           </Route>
         </Routes>
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       </Router>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       </CartWishlistProvider>
     </AuthProvider>
   );

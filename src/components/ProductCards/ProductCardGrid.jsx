@@ -5,11 +5,17 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios'; // 👈 add API
 import { toast } from 'react-hot-toast'; // 👈 add toast
+import { useAuth } from '../../context/AuthContext';
+import { useCartWishlist } from '../../context/CartWishlistContext';
 
 const ProductCardGrid = ({ product }) => {
+
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+    const { user } = useAuth();
+  const { refetch } = useCartWishlist();
+
 
   const handleImageLoad = () => setIsLoading(false);
 
@@ -17,6 +23,12 @@ const ProductCardGrid = ({ product }) => {
   const toggleWishlist = async (e) => {
     e.stopPropagation(); // 👈 CRITICAL: prevent card click
     try {
+
+        if (!user) {
+      toast.error("Please log in to use wishlist");
+      navigate("/login");
+      return;
+    }
       if (isInWishlist) {
         await api.delete('/wishlist', { data: { productId: product._id } });
         toast.success("Removed from wishlist");
@@ -25,6 +37,7 @@ const ProductCardGrid = ({ product }) => {
         toast.success("Added to wishlist");
       }
       setIsInWishlist(!isInWishlist);
+      refetch()
     } catch (err) {
       if (err.response?.status === 401) {
         toast.error("Please log in to use wishlist");

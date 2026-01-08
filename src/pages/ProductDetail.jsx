@@ -5,12 +5,13 @@ import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
-import Navbar from '../components/Navbar'
 import { getImageUrl } from "../utils/image";
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { refetch } = useCartWishlist(); // 👈 get refetch function
+
 
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -66,6 +67,7 @@ function ProductDetail() {
       quantity: parseInt(quantity)
     });
     toast.success(`Added ${product.name} to cart!`);
+    refetch()
   } catch (err) {
     if (err.response?.status === 401) {
       toast.error("Please log in to add to cart");
@@ -89,6 +91,8 @@ function ProductDetail() {
       // Add to wishlist
       await api.post('/wishlist', { productId: product._id });
       toast.success("Added to wishlist");
+      setIsInWishlist(true)
+      refetch()
     }
     setIsInWishlist(!isInWishlist);
   } catch (err) {

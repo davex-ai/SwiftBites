@@ -13,6 +13,9 @@ function Navbar() {
   const { user } = useAuth();
   const { cartCount, wishlistCount } = useCartWishlist();
 
+  // ✅ Check if user is admin
+  const isAdmin = user && user.role === 'admin';
+
   return (
     <nav className="relative px-4 py-4 bg-white shadow-sm z-50">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -35,10 +38,17 @@ function Navbar() {
               Profile
             </Link>
           )}
+          {/* 👇 Show Admin link ONLY if admin */}
+          {isAdmin && (
+            <Link to="/admin" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium flex items-center gap-1">
+              <MdAdminPanelSettings className="text-lg" />
+              Admin
+            </Link>
+          )}
         </div>
 
         {/* CART & WISHLIST ICONS WITH BADGES */}
-         {user && (
+        {user && (
           <div className="hidden sm:flex items-center space-x-5 relative">
             <Link to="/cart" className="relative">
               <img src={cart} alt="Cart" className="h-5" />
@@ -90,9 +100,20 @@ function Navbar() {
               Profile
             </Link>
           )}
+          {/* 👇 Mobile Admin link */}
+          {isAdmin && (
+            <Link 
+              to="/admin" 
+              onClick={() => setOpen(false)} 
+              className="text-gray-700 hover:text-[#F53E32] font-medium flex items-center gap-2"
+            >
+              <MdAdminPanelSettings className="text-lg" />
+              Admin
+            </Link>
+          )}
           
           {/* Mobile cart & wishlist with badges */}
-           {user && (
+          {user && (
             <div className="flex space-x-4 pt-2">
               <Link to="/cart" onClick={() => setOpen(false)} className="relative">
                 <img src={cart} alt="Cart" className="h-5" />

@@ -21,6 +21,7 @@ export default function Login() {
         try {
             const { data } = await API.post("/login", { email, password });
             login(data)
+            // In your browser console:
             toast.success("Login successful!");
             navigate("/");
         } catch (err) {

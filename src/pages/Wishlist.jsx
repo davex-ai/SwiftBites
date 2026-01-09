@@ -83,7 +83,6 @@ function Wishlist() {
             {wishlistProducts.map((product) => (
               <div key={product._id} className="relative group">
                 <ProductCardGrid product={product} />
-                {/* Remove button on hover */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();

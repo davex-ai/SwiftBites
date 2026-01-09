@@ -135,7 +135,7 @@ const fetchCart = async () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Cart Items */}
+
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow overflow-hidden">
                 {cartItems.map((item) => (
@@ -155,8 +155,6 @@ const fetchCart = async () => {
                       <div className="flex-1">
                         <h3 className="font-medium text-gray-800">{item.product.name}</h3>
                         <p className="text-gray-600">₦{item.product.price.toFixed(2)}</p>
-                        
-                        {/* Quantity Controls */}
                         <div className="flex items-center mt-2">
                           <button
                             onClick={() => updateQuantity(item.product._id, item.quantity - 1)}
@@ -212,7 +210,7 @@ const fetchCart = async () => {
               </div>
             </div>
             
-            {/* Order Summary */}
+
             <div className="bg-white rounded-lg shadow p-6 h-fit">
               <h2 className="text-xl font-bold mb-4">Order Summary</h2>
               

@@ -154,7 +154,7 @@ function Checkout() {
                 <h1 className="text-2xl font-bold mb-6">Checkout</h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Shipping Form */}
+        
                     <div className="lg:col-span-2">
                         <div className="bg-white rounded-lg shadow p-6">
                             <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
@@ -246,8 +246,6 @@ function Checkout() {
                                             Credit/Debit Card
                                         </label>
                                     </div>
-
-                                    {/* Card Form (only show if card selected) */}
                                     {formData.paymentMethod === "card" && (
                                         <div className="mt-3 p-3 border rounded bg-gray-50">
                                             <input
@@ -297,7 +295,7 @@ function Checkout() {
                         </div>
                     </div>
 
-                    {/* Order Summary */}
+        
                     <div className="bg-white rounded-lg shadow p-6 h-fit">
                         <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 

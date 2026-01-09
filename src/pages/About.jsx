@@ -80,7 +80,6 @@ export default function About() {
        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* Hero Section */}
         <div className={`text-center mb-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h2 className="text-5xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
             About SwiftBites
@@ -92,7 +91,6 @@ export default function About() {
           </p>
         </div>
 
-        {/* Story Section */}
         <div className="grid md:grid-cols-2 gap-12 mb-20">
           <div className={`transition-all duration-1000 delay-200 transform ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
             <h3 className="text-3xl font-bold text-gray-800 mb-4">Our Story</h3>
@@ -123,7 +121,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Stats Section */}
         <div className="bg-gradient-to-r from-red-500 to-orange-500 rounded-3xl shadow-2xl p-12 mb-20 transform hover:scale-105 transition-transform duration-500">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
@@ -149,7 +146,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Features Grid */}
         <div className="mb-20">
           <h3 className="text-4xl font-bold text-center text-gray-800 mb-12">Why Choose SwiftBites?</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -169,7 +165,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Values Section */}
         <div className="mb-20">
           <h3 className="text-4xl font-bold text-center text-gray-800 mb-12">Our Core Values</h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -188,7 +183,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Team Section */}
         <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-3xl p-12 shadow-xl">
           <h3 className="text-4xl font-bold text-center text-gray-800 mb-6">Meet Our Team</h3>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12 text-lg">
@@ -203,7 +197,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* Footer CTA */}
       <div className="bg-gradient-to-r from-red-600 to-orange-600 text-white py-16 mt-20">
         <div className="max-w-4xl mx-auto text-center px-6">
           <h3 className="text-4xl font-bold mb-4">Ready to Experience SwiftBites?</h3>

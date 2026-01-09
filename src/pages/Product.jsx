@@ -74,8 +74,6 @@ function Products() {
           </button>
         )}
       </div>
-
-      {/* CATEGORY FILTER */}
       <div className="mb-6">
         <h3 className="text-sm font-semibold mb-2">Product Category</h3>
         <div className="space-y-2">
@@ -113,7 +111,7 @@ function Products() {
         </div>
       </div>
 
-      {/* PRICE FILTER */}
+      
       <div className="mb-6">
         <h3 className="text-sm font-semibold mb-2">Price Range</h3>
         <div className="flex items-center gap-2 mb-2">
@@ -129,7 +127,7 @@ function Products() {
         </div>
       </div>
 
-      {/* CLEAR BUTTON */}
+      
       <button
         onClick={clearFilters}
         className="w-full bg-gray-200 text-gray-800 py-1.5 px-3 rounded text-sm hover:bg-gray-300"
@@ -142,12 +140,10 @@ function Products() {
   return (
     <>
       <Navbar/>
-    <div className="container mx-auto px-4 py-6">
-      {/* 👆 HEADER */}
+    <div className="container mx-auto px-4 py-6">      
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         <h1 className="text-2xl font-bold text-center sm:text-left">All Products</h1>
         <div className="flex items-center gap-2">
-          {/* Mobile Filter Button */}
           <button
             onClick={() => setShowFilters(true)}
             className="sm:hidden bg-gray-100 px-3 py-1.5 rounded text-sm"
@@ -192,7 +188,7 @@ function Products() {
         </main>
       </div>
 
-      {/* 📱 MOBILE LAYOUT: Grid only (filters shown in modal) */}
+      
       <div className="sm:hidden mt-4">
         <div className="grid grid-cols-2 gap-4">
           {filteredAndSortedProducts.map((product) => (

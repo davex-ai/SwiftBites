@@ -38,7 +38,7 @@ function Navbar() {
               Profile
             </Link>
           )}
-          {/* 👇 Show Admin link ONLY if admin */}
+          
           {isAdmin && (
             <Link to="/admin" className="text-gray-700 hover:text-[#F53E32] hover:underline font-medium flex items-center gap-1">
               <MdAdminPanelSettings className="text-lg" />
@@ -47,7 +47,7 @@ function Navbar() {
           )}
         </div>
 
-        {/* CART & WISHLIST ICONS WITH BADGES */}
+        
         {user && (
           <div className="hidden sm:flex items-center space-x-5 relative">
             <Link to="/cart" className="relative">
@@ -69,7 +69,7 @@ function Navbar() {
           </div>
         )}
 
-        {/* Mobile menu toggle */}
+        
         <div
           className="sm:hidden flex flex-col justify-center cursor-pointer"
           onClick={() => setOpen(!open)}
@@ -81,7 +81,7 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      
       <div
         className={`sm:hidden absolute left-0 right-0 bg-white shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${open ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}
       >
@@ -100,7 +100,7 @@ function Navbar() {
               Profile
             </Link>
           )}
-          {/* 👇 Mobile Admin link */}
+          
           {isAdmin && (
             <Link 
               to="/admin" 
@@ -112,7 +112,7 @@ function Navbar() {
             </Link>
           )}
           
-          {/* Mobile cart & wishlist with badges */}
+          
           {user && (
             <div className="flex space-x-4 pt-2">
               <Link to="/cart" onClick={() => setOpen(false)} className="relative">

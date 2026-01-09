@@ -57,7 +57,6 @@ const ProductCardGrid = ({ product }) => {
       className="bg-white rounded-xl shadow-sm p-3 mb-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer" 
       onClick={() => navigate(`/products/${product._id}`)}
     >
-      {/* Image Container */}
       <div className="w-full h-40 rounded-lg overflow-hidden mb-3 relative">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -71,7 +70,6 @@ const ProductCardGrid = ({ product }) => {
           onLoad={handleImageLoad}
           onError={() => setIsLoading(false)}
         />
-        {/* Wishlist Heart */}
         <button
           onClick={toggleWishlist} // 👈 now works!
           className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md hover:scale-110 transition-transform"
@@ -85,7 +83,6 @@ const ProductCardGrid = ({ product }) => {
         </button>
       </div>
 
-      {/* Rest of card (category, rating, name, price, stock) */}
       <div className="flex justify-center mb-1">
         <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
           {product.category}

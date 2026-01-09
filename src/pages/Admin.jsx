@@ -31,20 +31,26 @@ export default function Admin() {
 
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
+      if (user?.role === "admin") fetchOrders();
+  }, [user]);
 
   const fetchOrders = async () => {
-    try {
-      const { data } = await api.get("/admin/orders");
-      setOrders(data);
-    } catch (err) {
+  try {
+    const { data } = await api.get("/admin/orders");
+    setOrders(data);
+  } catch (err) {
+    console.error("Fetch orders error:", err);
+    
+    if (err.response?.status === 401) {
+      toast.error("Session expired. Please log in again.");
+      navigate("/login");
+    } else {
       toast.error("Failed to load orders");
-      console.error(err);
-    } finally {
-      setLoading(false);
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
   const updateOrderStatus = async (orderId, newStatus) => {
     try {

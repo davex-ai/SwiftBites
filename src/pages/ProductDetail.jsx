@@ -123,22 +123,15 @@ if (err.response?.status === 401) {
     <>
     <Navbar/>
      <div className="container mx-auto px-4 py-6">
-      {/* Breadcrumb */}
       <nav className="text-sm mb-4">
         <a href="/products" className="text-blue-600 hover:underline">All Products</a> &gt; {product.name}
       </nav>
-
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* 👈 IMAGE GALLERY */}
-          {/* 👈 IMAGE GALLERY */}
+      <div className="flex flex-col lg:flex-row gap-8"> 
 <div className="lg:w-1/2">
   <div className="relative mb-4 rounded-xl overflow-hidden shadow-lg bg-gray-50">
-    {/* Loading Skeleton */}
     {!product.images && (
       <div className="w-full h-80 bg-gray-200 animate-pulse rounded-xl"></div>
     )}
-
-    {/* Main Image */}
       {product.images ? (
         <img
           src={getImageUrl(product.images)}
@@ -158,17 +151,14 @@ if (err.response?.status === 401) {
       )}
     </div>
 
-    {/* Optional: Add "Image not available" text if needed */}
     {!product.images && (
       <p className="text-center text-sm text-gray-500 mt-2">No image available</p>
     )}
   </div>
-
-        {/* 👉 PRODUCT INFO */}
-        <div className="lg:w-1/2">
+      <div className="lg:w-1/2">
           <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
 
-          {/* Rating */}
+    
           <div className="flex items-center mb-4">
             <div className="flex text-yellow-500">
               {"★".repeat(Math.floor(product.rating))}
@@ -177,7 +167,7 @@ if (err.response?.status === 401) {
             <span className="ml-2 text-sm text-gray-600">({product.numReviews} reviews)</span>
           </div>
 
-          {/* Price */}
+    
           <div className="flex items-baseline gap-2 mb-4">
             <span className="text-2xl font-bold text-gray-900">
               ₦{product.price.toFixed(2)}
@@ -189,7 +179,7 @@ if (err.response?.status === 401) {
             )}
           </div>
 
-          {/* Stock Status */}
+    
           <div className="mb-4">
             <span
               className={`inline-block px-3 py-1 rounded-full text-xs ${
@@ -202,7 +192,7 @@ if (err.response?.status === 401) {
             </span>
           </div>
 
-          {/* Quantity Selector */}
+    
           <div className="flex items-center mb-4">
             <label className="mr-2">Qty:</label>
             <input
@@ -215,7 +205,7 @@ if (err.response?.status === 401) {
             />
           </div>
 
-          {/* Live Total Price */}
+    
             <div className="mb-4">
               <p className="text-gray-700">
                 Total: <span className="font-bold text-lg text-[#F53E32]">
@@ -224,7 +214,7 @@ if (err.response?.status === 401) {
               </p>
             </div>
 
-          {/* Add to Cart & Wishlist Buttons */}
+    
           <div className="flex gap-2 mb-6">
             <button
               onClick={handleAddToCart}
@@ -250,13 +240,13 @@ if (err.response?.status === 401) {
             </button>
           </div>
 
-          {/* Description */}
+    
           <div className="mb-6">
             <h3 className="font-semibold mb-2">Description</h3>
             <p className="text-gray-700">{product.description || "No description available."}</p>
           </div>
 
-          {/* Specifications */}
+    
           <div className="mb-6">
             <h3 className="font-semibold mb-2">Specifications</h3>
             <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
@@ -270,7 +260,7 @@ if (err.response?.status === 401) {
         </div>
       </div>
 
-      {/* RELATED PRODUCTS */}
+
       {relatedProducts.length > 0 && (
         <div className="mt-12">
           <h2 className="text-xl font-bold mb-4">Related Products</h2>
@@ -282,7 +272,7 @@ if (err.response?.status === 401) {
         </div>
       )}
 
-      {/* REVIEWS SECTION */}
+
       <div className="mt-12">
         <h2 className="text-xl font-bold mb-4">Customer Reviews ({product.numReviews})</h2>
         {product.reviews && product.reviews.length > 0 ? (

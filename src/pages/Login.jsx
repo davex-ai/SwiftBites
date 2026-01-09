@@ -22,6 +22,7 @@ export default function Login() {
             const { data } = await API.post("/login", { email, password });
             login(data)
             // In your browser console:
+console.log(JSON.parse(localStorage.getItem('user')));
             toast.success("Login successful!");
             navigate("/");
         } catch (err) {

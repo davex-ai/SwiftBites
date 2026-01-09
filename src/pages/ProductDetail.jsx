@@ -68,8 +68,18 @@ function ProductDetail() {
       productId: product._id,
       quantity: parseInt(quantity)
     });
-    toast.success(`Added ${product.name} to cart! Go to Cart to checkout`);
-    refetch()
+// ✅ ENHANCED TOAST
+      toast.success(
+        `Added ${product.name} to cart!`,
+        {
+          action: {
+            label: "Go to Cart",
+            onClick: () => navigate("/cart")
+          }
+        }
+      );
+      await refetch();
+      await refetch()
   } catch (err) {
     if (err.response?.status === 401) {
       toast.error("Please log in to add to cart");

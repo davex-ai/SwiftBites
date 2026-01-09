@@ -41,6 +41,7 @@ function Profile() {
   }, []);
 
   useEffect(() => {
+    console.log("Full user object:", user);
   console.log("User createdAt:", user?.createdAt); // 👈 LOG IT
 }, [user]);
 

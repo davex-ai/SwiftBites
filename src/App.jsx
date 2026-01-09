@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail";
 import { CartWishlistProvider } from "./context/CartWishlistContext";
 import Wishlist from "./pages/Wishlist";
 import Profile from "./pages/Profile";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/wishlist" element={<Wishlist/>} />
           {/* <Route path="/checkout" element={<Checkout/>} /> */}
-          {/* <Route path="/cart" element={<Cart/>} /> */}
+          <Route path="/cart" element={<Cart/>} />
           {/* <Route path="/order" element={<Order/>} /> */}
           </Route>
         </Routes>

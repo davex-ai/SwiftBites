@@ -13,19 +13,19 @@ function Cart() {
   const [updating, setUpdating] = useState(false);
 
   // Fetch cart items
-  const fetchCart = async () => {
-    try {
-      const { data } = await api.get("/my-cart");
-      setCartItems(data || []);
-      console.log("Cart", data);
-      
-    } catch (err) {
-      console.error("Failed to fetch cart:", err);
-      toast.error("Unable to load cart");
-    } finally {
-      setLoading(false);
-    }
-  };
+const fetchCart = async () => {
+  try {
+    const { data } = await api.get("/my-cart");
+    // Assuming the response is the full user object
+    const cartArray = Array.isArray(data.cart) ? data.cart : [];
+    setCartItems(cartArray);
+  } catch (err) {
+    console.error("Failed to fetch cart:", err);
+    toast.error("Unable to load cart");
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchCart();

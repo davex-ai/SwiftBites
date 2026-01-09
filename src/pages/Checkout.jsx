@@ -27,14 +27,16 @@ function Checkout() {
     const fetchCart = async () => {
       try {
         const { data } = await api.get("/my-cart");
-        console.log(`Items ${data}`);
-        if (!data || data.length === 0) {
-            
-          toast.error("Your cart is empty");
-          navigate("/cart");
-          return;
+        // Ensure cart is an array
+        const cartArray = Array.isArray(data.cart) ? data.cart : [];
+
+        if (cartArray.length === 0) {
+        toast.error("Your cart is empty");
+        navigate("/cart");
+        return;
         }
-        setCartItems(data);
+
+        setCartItems(cartArray);
       } catch (err) {
         console.error("Failed to fetch cart:", err);
         toast.error("Unable to load cart");

@@ -39,6 +39,7 @@ const fetchCart = async () => {
 
   // Update quantity
   const updateQuantity = async (productId, newQuantity) => {
+      console.log("Updating quantity:", { productId, newQuantity });
     if (newQuantity < 1) return;
     
     setUpdating(true);

@@ -5,6 +5,7 @@ import api from "../api/axios";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
+import Footer from "../components/Footer";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -285,6 +286,7 @@ function Checkout() {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

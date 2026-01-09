@@ -5,6 +5,7 @@ import api from "../api/axios";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import { getImageUrl } from "../utils/image";
+import Footer from "../components/Footer";
 
 function Cart() {
   const navigate = useNavigate();
@@ -119,7 +120,7 @@ const fetchCart = async () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 h-screen">
         <h1 className="text-2xl font-bold mb-6">Your Shopping Cart</h1>
         
         {cartItems.length === 0 ? (
@@ -245,6 +246,7 @@ const fetchCart = async () => {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 }

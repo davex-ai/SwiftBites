@@ -5,6 +5,7 @@ import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 import Navbar from "../components/Navbar";
 import { toast } from "react-toastify";
+import Footer from "../components/Footer";
 
 function Wishlist() {
   const [wishlistProducts, setWishlistProducts] = useState([]);
@@ -54,7 +55,7 @@ function Wishlist() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 py-6 h-screen">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">My Wishlist</h1>
           {wishlistProducts.length > 0 && (
@@ -101,6 +102,7 @@ function Wishlist() {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 }

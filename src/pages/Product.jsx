@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
 import Navbar from '../components/Navbar'
+import Footer from "../components/Footer";
 
 
 function Products() {
@@ -203,6 +204,7 @@ function Products() {
         )}
       </div>
     </div>
+    <Footer/>
     </>
   );
 }

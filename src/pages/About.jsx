@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaUsers, FaShoppingBag, FaBox, FaTruck, FaHeadset, FaShieldAlt, FaStar, FaLeaf, FaHeart, FaRocket } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
@@ -213,6 +214,7 @@ export default function About() {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 }

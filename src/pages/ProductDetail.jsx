@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { getImageUrl } from "../utils/image";
 import { useCartWishlist } from "../context/CartWishlistContext";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -306,6 +307,7 @@ if (err.response?.status === 401) {
         )}
       </div>
     </div>
+    <Footer/>
     </>
   );
 }

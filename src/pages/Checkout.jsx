@@ -27,7 +27,9 @@ function Checkout() {
     const fetchCart = async () => {
       try {
         const { data } = await api.get("/my-cart");
+        console.log(`Items ${data}`);
         if (!data || data.length === 0) {
+            
           toast.error("Your cart is empty");
           navigate("/cart");
           return;

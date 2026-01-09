@@ -17,6 +17,8 @@ function Cart() {
     try {
       const { data } = await api.get("/my-cart");
       setCartItems(data || []);
+      console.log("Cart", data);
+      
     } catch (err) {
       console.error("Failed to fetch cart:", err);
       toast.error("Unable to load cart");

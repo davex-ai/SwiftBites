@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import api from "../api/axios";
 import Navbar from "../components/Navbar";
 import { getAvatarUrl } from "../utils/avatar";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 function formatDate(dateStr) {
   if (!dateStr) return "Unknown";

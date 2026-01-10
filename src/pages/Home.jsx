@@ -1,126 +1,133 @@
-import React, { useState } from 'react';
-import { FaSearch, FaShoppingCart, FaUser, FaBars, FaTimes, FaChevronRight, FaTruck, FaShieldAlt, FaHeadset, FaLeaf } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaChevronRight, FaTruck, FaShieldAlt, FaHeadset, FaLeaf, FaPercent, FaClock, FaStar } from 'react-icons/fa';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-
-// Mock product data
-const mockProducts = [
-  {
-    _id: '1',
-    name: 'Organic Fresh Strawberries',
-    price: 4500,
-    category: 'Fruits',
-    rating: 4.5,
-    numReviews: 128,
-    stock: 45,
-    images: '/placeholder-strawberry.jpg'
-  },
-  {
-    _id: '2',
-    name: 'Premium Basmati Rice 5kg',
-    price: 8900,
-    category: 'Grains',
-    rating: 4.8,
-    numReviews: 256,
-    stock: 23,
-    images: '/placeholder-rice.jpg'
-  },
-  {
-    _id: '3',
-    name: 'Extra Virgin Olive Oil',
-    price: 6200,
-    category: 'Oils',
-    rating: 4.6,
-    numReviews: 89,
-    stock: 67,
-    images: '/placeholder-oil.jpg'
-  },
-  {
-    _id: '4',
-    name: 'Fresh Dairy Milk 2L',
-    price: 1800,
-    category: 'Dairy',
-    rating: 4.7,
-    numReviews: 342,
-    stock: 12,
-    images: '/placeholder-milk.jpg'
-  }
-];
-
-const categories = [
-  { name: 'Fruits & Vegetables', icon: '🥬' },
-  { name: 'Grains & Cereals', icon: '🌾' },
-  { name: 'Dairy Products', icon: '🥛' },
-  { name: 'Meat & Seafood', icon: '🥩' },
-  { name: 'Bakery', icon: '🍞' },
-  { name: 'Beverages', icon: '🥤' },
-  { name: 'Snacks', icon: '🍿' },
-  { name: 'Spices', icon: '🧂' }
-];
+import ProductCardGrid from '../components/ProductCards/ProductCardGrid';
+import api from '../api/axios';
+import { Link } from 'react-router-dom';
 
 const FoodEcommerceHome = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data } = await api.get("/products");
+        setProducts(data.slice(0, 8)); // Get first 8 products for featured section
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const deals = [
+    {
+      title: 'Fresh Produce',
+      discount: 'Up to 30% Off',
+      description: 'Farm-fresh fruits and vegetables',
+      bgColor: 'bg-green-50',
+      textColor: 'text-green-700'
+    },
+    {
+      title: 'Dairy Essentials',
+      discount: 'Save 25%',
+      description: 'Premium milk, cheese & yogurt',
+      bgColor: 'bg-blue-50',
+      textColor: 'text-blue-700'
+    },
+    {
+      title: 'Bakery Items',
+      discount: 'Buy 2 Get 1',
+      description: 'Freshly baked daily',
+      bgColor: 'bg-orange-50',
+      textColor: 'text-orange-700'
+    },
+    {
+      title: 'Pantry Staples',
+      discount: '20% Off',
+      description: 'Rice, grains & cooking oils',
+      bgColor: 'bg-amber-50',
+      textColor: 'text-amber-700'
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-white">
       <Navbar/>
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-orange-50 to-orange-100 py-12">
+      {/* Enhanced Hero Section */}
+      <section className="bg-gradient-to-r from-orange-50 to-orange-100 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Fresh Groceries Delivered to Your Doorstep
-              </h2>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Shop from our wide selection of fresh produce, quality meats, and pantry essentials. Get same-day delivery on orders over ₦5,000.
-              </p>
-              <button className="bg-orange-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-orange-700 transition-colors inline-flex items-center space-x-2">
-                <span>Shop Now</span>
+          <div className="text-center space-y-6 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              Fresh Groceries Delivered to Your Doorstep
+            </h1>
+            <p className="text-gray-600 text-base leading-relaxed">
+              Shop from our wide selection of fresh produce, quality meats, and pantry essentials. Get same-day delivery on orders over ₦5,000. Experience the convenience of online grocery shopping with guaranteed freshness and competitive prices.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <button className="bg-orange-600 text-white px-8 py-3 rounded-lg text-sm font-medium hover:bg-orange-700 transition-colors inline-flex items-center space-x-2">
+                <Link to="/products"> <span>Shop Now</span></Link>
                 <FaChevronRight className="text-xs" />
               </button>
+              <button className="bg-white text-orange-600 px-8 py-3 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors border border-orange-600">
+                <Link to="/products">Browse Categories</Link>
+              </button>
             </div>
-            <div className="hidden md:block">
-              <div className="bg-white rounded-2xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-orange-50 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-1">🥗</div>
-                    <p className="text-xs text-gray-700 font-medium">Fresh Produce</p>
-                  </div>
-                  <div className="bg-orange-50 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-1">🥖</div>
-                    <p className="text-xs text-gray-700 font-medium">Baked Daily</p>
-                  </div>
-                  <div className="bg-orange-50 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-1">🥩</div>
-                    <p className="text-xs text-gray-700 font-medium">Premium Meats</p>
-                  </div>
-                  <div className="bg-orange-50 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-1">🧀</div>
-                    <p className="text-xs text-gray-700 font-medium">Dairy Fresh</p>
-                  </div>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-8">
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="flex items-center justify-center mb-2">
+                  <FaClock className="text-orange-600 text-xl" />
                 </div>
+                <p className="text-xs text-gray-600 mb-1">Delivery Time</p>
+                <p className="text-sm font-bold text-gray-900">30-60 mins</p>
+              </div>
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="flex items-center justify-center mb-2">
+                  <FaPercent className="text-orange-600 text-xl" />
+                </div>
+                <p className="text-xs text-gray-600 mb-1">Save Up To</p>
+                <p className="text-sm font-bold text-gray-900">30% Off</p>
+              </div>
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="flex items-center justify-center mb-2">
+                  <FaStar className="text-orange-600 text-xl" />
+                </div>
+                <p className="text-xs text-gray-600 mb-1">Rated</p>
+                <p className="text-sm font-bold text-gray-900">4.8/5.0</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Today's Deals */}
       <section className="py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-6">Shop by Category</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-            {categories.map((category, index) => (
+          <h3 className="text-xl font-bold text-gray-900 mb-6">Today's Special Deals</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {deals.map((deal, index) => (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-lg p-4 text-center hover:border-orange-400 hover:shadow-md transition-all duration-200 cursor-pointer group"
+                className={`${deal.bgColor} rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-200 cursor-pointer group`}
               >
-                <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-200">
-                  {category.icon}
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className={`text-sm font-bold ${deal.textColor}`}>{deal.title}</h4>
+                  <FaPercent className={`${deal.textColor} text-lg group-hover:scale-110 transition-transform`} />
                 </div>
-                <p className="text-xs text-gray-700 font-medium">{category.name}</p>
+                <p className={`text-lg font-bold ${deal.textColor} mb-2`}>{deal.discount}</p>
+                <p className="text-xs text-gray-600">{deal.description}</p>
+                <button className={`mt-4 text-xs ${deal.textColor} font-medium inline-flex items-center space-x-1 hover:underline`}>
+                  <Link to="/products"><span>Shop Now</span></Link>
+                  <FaChevronRight className="text-xs" />
+                </button>
               </div>
             ))}
           </div>
@@ -137,48 +144,25 @@ const FoodEcommerceHome = () => {
               <FaChevronRight className="text-xs" />
             </button>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {mockProducts.map((product) => (
-              <div key={product._id} className="bg-white rounded-lg shadow-sm p-3 hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                <div className="w-full h-40 rounded-lg overflow-hidden mb-3 bg-gray-100 flex items-center justify-center">
-                  <span className="text-4xl">{product.category === 'Fruits' ? '🍓' : product.category === 'Grains' ? '🌾' : product.category === 'Oils' ? '🫒' : '🥛'}</span>
-                </div>
-                <div className="flex justify-center mb-1">
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                    {product.category}
-                  </span>
-                </div>
-                <div className="flex justify-center items-center mb-1">
-                  <div className="flex text-yellow-500 text-xs">
-                    {"★".repeat(Math.floor(product.rating))}
-                    {"☆".repeat(5 - Math.floor(product.rating))}
-                  </div>
-                  <span className="ml-1 text-xs text-gray-500">
-                    ({product.numReviews})
-                  </span>
-                </div>
-                <h4 className="text-center font-medium text-gray-800 text-sm line-clamp-2 mb-2">
-                  {product.name}
-                </h4>
-                <div className="flex justify-center items-baseline gap-1 mb-2">
-                  <span className="text-lg font-bold text-gray-900">
-                    ₦{product.price.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex justify-center">
-                  <span className={`text-xs px-2 py-1 rounded-full ${product.stock > 0 ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
-                    {product.stock > 0 ? `In stock (${product.stock})` : 'Out of stock'}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-gray-500">Loading products...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {products.map((product) => (
+                <ProductCardGrid key={product._id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Features */}
+      {/* Why Choose Us */}
       <section className="py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Why Choose FreshMart</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -212,7 +196,6 @@ const FoodEcommerceHome = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer/>
     </div>
   );

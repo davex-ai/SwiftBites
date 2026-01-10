@@ -1,9 +1,9 @@
-// src/components/ProductCards/ProductCardGrid.jsx
+
 import React, { useEffect, useState } from 'react';
 import { BASE_IMAGE_URL } from '../../api/axios';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import api from '../../api/axios'; // 👈 add API
+import api from '../../api/axios'; 
 import { toast } from "react-toastify";
 import { useAuth } from '../../context/AuthContext';
 import { useCartWishlist } from '../../context/CartWishlistContext';
@@ -23,9 +23,9 @@ const ProductCardGrid = ({ product }) => {
     setIsInWishlist(wishlistProductIds.has(product._id));
   }, [wishlistProductIds, product._id]);
 
-  // ✅ NEW: Toggle wishlist with API
+  
   const toggleWishlist = async (e) => {
-    e.stopPropagation(); // 👈 CRITICAL: prevent card click
+    e.stopPropagation(); 
     if (!user) {
   toast.error("Please log in to use wishlist");
   navigate("/login");
@@ -71,7 +71,7 @@ const ProductCardGrid = ({ product }) => {
           onError={() => setIsLoading(false)}
         />
         <button
-          onClick={toggleWishlist} // 👈 now works!
+          onClick={toggleWishlist} 
           className="absolute top-2 right-2 bg-white rounded-full p-1 shadow-md hover:scale-110 transition-transform"
           aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
         >

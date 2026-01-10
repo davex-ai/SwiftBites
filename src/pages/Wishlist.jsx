@@ -1,4 +1,4 @@
-// src/pages/WishlistPage.jsx
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
@@ -16,7 +16,6 @@ function Wishlist() {
     const fetchWishlist = async () => {
       try {
         const { data } = await api.get("/wishlist");
-        // Your backend returns { products: [...] }
         setWishlistProducts(data.products || []);
       } catch (err) {
         if (err.response?.status === 401) {

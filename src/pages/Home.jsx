@@ -14,7 +14,7 @@ const FoodEcommerceHome = () => {
     const fetchProducts = async () => {
       try {
         const { data } = await api.get("/products");
-        setProducts(data.slice(0, 8)); // Get first 8 products for featured section
+        setProducts(data.slice(0, 8)); 
       } catch (err) {
         console.error(err);
       } finally {

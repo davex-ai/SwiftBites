@@ -7,7 +7,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/Protected";
 import ProductsPage from "./pages/Product";
 import ProductDetail from "./pages/ProductDetail";
-import { CartWishlistProvider } from "./context/CartWishlistContext";
+import { CartWishlistProvider } from "./context//CartWishlistContext.jsx";
 import Wishlist from "./pages/Wishlist";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";

@@ -1,4 +1,4 @@
-// src/pages/Checkout.jsx
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
@@ -14,21 +14,21 @@ function Checkout() {
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
 
-    // Form state
+    
     const [formData, setFormData] = useState({
         fullName: user?.name || "",
         address: user?.address || "",
         city: user?.city || "",
         phone: user?.phoneNo || "",
-        paymentMethod: "cash" // Default to cash on delivery
+        paymentMethod: "cash" 
     });
 
-    // Fetch cart items
+    
     useEffect(() => {
         const fetchCart = async () => {
             try {
                 const { data } = await api.get("/my-cart");
-                // Ensure cart is an array
+                
                 const cartArray = Array.isArray(data.cart) ? data.cart : [];
 
                 if (cartArray.length === 0) {
@@ -50,13 +50,13 @@ function Checkout() {
         fetchCart();
     }, [navigate]);
 
-    // Calculate totals
+    
     const subtotal = cartItems.reduce((sum, item) => sum + (item.product?.price || 0) * item.quantity, 0);
     const shipping = subtotal > 0 ? 1500 : 0;
     const tax = subtotal * 0.075;
     const total = subtotal + shipping + tax;
 
-    // Handle form input changes
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -65,11 +65,11 @@ function Checkout() {
         }));
     };
 
-    // Handle form submission
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validation
+        
         if (!formData.fullName || !formData.address || !formData.city || !formData.phone) {
             toast.error("Please fill in all shipping fields");
             return;
@@ -85,7 +85,7 @@ function Checkout() {
                 toast.error("Please fill in all card details");
                 return;
             }
-            // Simple validation
+            
             if (!/^\d{13,19}$/.test(formData.cardNumber.replace(/\s/g, ''))) {
                 toast.error("Invalid card number");
                 return;
@@ -95,14 +95,14 @@ function Checkout() {
         setSubmitting(true);
 
         try {
-            // Prepare order items
+            
             const orderItems = cartItems.map(item => ({
                 product: item.product._id,
                 quantity: item.quantity,
                 price: item.product.price
             }));
 
-            // Create order
+            
             const orderData = {
                 orderItems,
                 shippingAddress: {
@@ -116,7 +116,7 @@ function Checkout() {
 
             const response = await api.post("/orders", orderData);
 
-            // Clear cart after successful order
+            
             await api.delete("/cart-clear");
 
             toast.success("Order placed successfully!");

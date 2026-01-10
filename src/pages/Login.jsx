@@ -1,4 +1,3 @@
-//login tastifies invalid credential even tho user email and password is correct
 import { useState } from "react";
 import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
@@ -21,8 +20,7 @@ export default function Login() {
         try {
             const { data } = await API.post("/login", { email, password });
             login(data)
-            // In your browser console:
-console.log(JSON.parse(localStorage.getItem('user')));
+        console.log(JSON.parse(localStorage.getItem('user')));
             toast.success("Login successful!");
             navigate("/");
         } catch (err) {

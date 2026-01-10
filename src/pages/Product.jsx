@@ -1,4 +1,3 @@
-// ProductsPage.jsx
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import ProductCardGrid from "../components/ProductCards/ProductCardGrid";
@@ -9,7 +8,7 @@ import Footer from "../components/Footer";
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showFilters, setShowFilters] = useState(false); // for mobile modal
+  const [showFilters, setShowFilters] = useState(false); 
 
   const [filters, setFilters] = useState({
     categories: [],

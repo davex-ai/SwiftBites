@@ -12,7 +12,6 @@ export default function About() {
   useEffect(() => {
     setIsVisible(true);
     
-    // Animated counters
     const animateCount = (key, target, duration) => {
       const increment = target / (duration / 16);
       let current = 0;

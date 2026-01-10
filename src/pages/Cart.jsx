@@ -1,4 +1,4 @@
-// src/pages/Cart.jsx
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
@@ -13,11 +13,9 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
 
-  // Fetch cart items
 const fetchCart = async () => {
   try {
     const { data } = await api.get("/my-cart");
-    // Assuming the response is the full user object
     const cartArray = Array.isArray(data.cart) ? data.cart : [];
     setCartItems(cartArray);
   } catch (err) {
@@ -32,13 +30,11 @@ const fetchCart = async () => {
     fetchCart();
   }, []);
 
-  // Calculate totals
   const subtotal = cartItems.reduce((sum, item) => sum + (item.product?.price || 0) * item.quantity, 0);
-  const shipping = subtotal > 0 ? 1500 : 0; // Flat shipping fee
-  const tax = subtotal * 0.075; // 7.5% tax
+  const shipping = subtotal > 0 ? 1500 : 0
+  const tax = subtotal * 0.075
   const total = subtotal + shipping + tax;
 
-  // Update quantity
   const updateQuantity = async (productId, newQuantity) => {
       console.log("Updating quantity:", { productId, newQuantity });
     if (newQuantity < 1) return;
@@ -46,7 +42,7 @@ const fetchCart = async () => {
     setUpdating(true);
     try {
       await api.patch(`/cart/${productId}`, { quantity: newQuantity });
-      await fetchCart(); // Refresh entire cart
+      await fetchCart()
     } catch (err) {
       console.error("Failed to update quantity:", err);
       toast.error("Failed to update quantity");
@@ -55,7 +51,6 @@ const fetchCart = async () => {
     }
   };
 
-  // Remove item
   const removeItem = async (productId) => {
     try {
       await api.delete("/cart", { data: { productId } });
@@ -67,7 +62,6 @@ const fetchCart = async () => {
     }
   };
 
-  // Clear cart
   const clearCart = async () => {
     if (!window.confirm("Are you sure you want to clear your cart?")) return;
     
@@ -81,7 +75,6 @@ const fetchCart = async () => {
     }
   };
 
-  // Handle checkout
   const handleCheckout = () => {
     if (cartItems.length === 0) {
       toast.error("Your cart is empty");

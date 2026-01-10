@@ -1,4 +1,3 @@
-// src/pages/AdminOrders.jsx
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../api/axios";
@@ -56,7 +55,7 @@ export default function Admin() {
     try {
       await api.patch(`/orders/${orderId}`, { status: newStatus });
       toast.success("Order updated!");
-      fetchOrders(); // refresh
+      fetchOrders(); 
     } catch (err) {
       toast.error("Failed to update order");
     }

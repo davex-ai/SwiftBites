@@ -13,7 +13,6 @@ function Navbar() {
   const { user } = useAuth();
   const { cartCount, wishlistCount } = useCartWishlist();
 
-  // ✅ Check if user is admin
   const isAdmin = user && user.role === 'admin';
 
   return (

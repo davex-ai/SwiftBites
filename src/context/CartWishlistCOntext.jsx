@@ -1,4 +1,3 @@
-// src/context/CartWishlistContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../api/axios";
 import { useAuth } from "./AuthContext";
@@ -21,14 +20,10 @@ export const CartWishlistProvider = ({ children }) => {
 
         setLoading(true);
         try {
-            // Fetch cart
             const cartRes = await api.get("/my-cart");
-            // ✅ FIX: Access .cart array
             setCartCount(cartRes.data?.cart?.length || 0);
 
-            // Fetch wishlist
             const wishlistRes = await api.get("/wishlist");
-            // ✅ FIX: Access .products array
             const wishlistProducts = wishlistRes.data?.products || [];
             setWishlistCount(wishlistProducts.length);
             const wishlistIds = new Set(wishlistProducts.map(p => p._id));

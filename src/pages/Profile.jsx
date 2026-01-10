@@ -1,4 +1,3 @@
-// src/pages/Profile.jsx
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -65,8 +64,7 @@ function Profile() {
     setIsVisible(true);
   }, []);
 
-  // Check for new order from URL params
-  useEffect(() => {
+    useEffect(() => {
     const params = new URLSearchParams(location.search);
     const newOrderId = params.get('order');
     if (newOrderId) {
@@ -116,10 +114,8 @@ function Profile() {
   const memberSince = formatDate(user.createdAt);
   const profilePic = getAvatarUrl(user);
 
-  // Show order details view with animations
-  if (selectedOrder) {
-    const status = getStatusBadge(selectedOrder.status); // 👈 USE status FIELD!    
-    return (
+    if (selectedOrder) {
+    const status = getStatusBadge(selectedOrder.status);     return (
       <>
         <Navbar />
         <div className="container mx-auto px-4 py-6 animate-fadeIn">

@@ -1,4 +1,3 @@
-// src/pages/ProductDetailPage.jsx
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/axios";
@@ -13,8 +12,7 @@ import Footer from "../components/Footer";
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { refetch } = useCartWishlist(); // 👈 get refetch function
-
+  const { refetch } = useCartWishlist(); 
 
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -22,23 +20,19 @@ function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [isInWishlist, setIsInWishlist] = useState(false);
 
-  // Fetch product by ID
-  useEffect(() => {
+    useEffect(() => {
     const fetchProduct = async () => {
       try {
-      // Fetch product
-      const { data: productData } = await api.get(`/products/${id}`);
+            const { data: productData } = await api.get(`/products/${id}`);
       setProduct(productData);
 
-      // Fetch wishlist
-      const { data: wishlistData } = await api.get('/wishlist');
+            const { data: wishlistData } = await api.get('/wishlist');
       const inWishlist = wishlistData?.products?.some(
         p => p._id === id || p === id
       );
       setIsInWishlist(!!inWishlist);
 
-      // Fetch related products
-      if (productData.category) {
+            if (productData.category) {
         const related = await api.get(`/products/category/${productData.category}`);
         setRelatedProducts(related.data.filter(p => p._id !== id).slice(0, 4));
       }
@@ -69,7 +63,6 @@ function ProductDetail() {
       productId: product._id,
       quantity: parseInt(quantity)
     });
-// ✅ ENHANCED TOAST
       toast.success(
         `Added ${product.name} to cart!`,
         {
@@ -84,8 +77,7 @@ function ProductDetail() {
   } catch (err) {
     if (err.response?.status === 401) {
       toast.error("Please log in to add to cart");
-      navigate("/login"); // or your auth route
-    } else {
+      navigate("/login");     } else {
       toast.error("Failed to add to cart");
       console.error(err);
     }
@@ -95,14 +87,12 @@ function ProductDetail() {
   const toggleWishlist = async () => {
   try {
     if (isInWishlist) {
-      // Remove from wishlist
-      await api.delete('/wishlist', {
+            await api.delete('/wishlist', {
         data: { productId: product._id } 
       });
       toast.success("Removed from wishlist");
     } else {
-      // Add to wishlist
-      await api.post('/wishlist', { productId: product._id });
+            await api.post('/wishlist', { productId: product._id });
       toast.success("Added to wishlist");
     }
     setIsInWishlist(!isInWishlist);
@@ -138,8 +128,7 @@ if (err.response?.status === 401) {
           alt={product.name}
           className="w-full h-auto object-contain p-4  transition-transform duration-300 hover:scale-105"
           onError={(e) => {
-            e.target.src = '/placeholder.png'; // fallback if broken
-            e.target.classList.remove('hover:scale-105');
+            e.target.src = '/placeholder.png';             e.target.classList.remove('hover:scale-105');
           }}
         />
       ) : (

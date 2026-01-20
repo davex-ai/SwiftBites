@@ -72,7 +72,7 @@ const FoodEcommerceHome = () => {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <button className="bg-orange-600 text-white px-8 py-3 rounded-lg text-sm font-medium hover:bg-orange-700 transition-colors inline-flex items-center space-x-2">
-                <Link to="/products"> <span>Shop Now</span></Link>
+                <Link to="/login"> <span>Shop Now</span></Link>
                 <FaChevronRight className="text-xs" />
               </button>
               <button className="bg-white text-orange-600 px-8 py-3 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors border border-orange-600">
